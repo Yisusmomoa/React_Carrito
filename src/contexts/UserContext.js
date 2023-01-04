@@ -13,20 +13,18 @@ const UserContext=createContext()
  * 
  */
 
-
 const UserProvider=({children})=>{
-    const [user, setUser]=useState({})
+    const [user, setUser]=useState(null)
     
     const login=async (puser)=>{
-      console.log("usercontext")
       const res=await loginAction(puser)
-      debugger;
       if(res!=null){
         setUser(res)
         return true
       }
       return false
     }
+    
     const logout=()=>setUser(null)
     const data={user, login, logout}
 

@@ -4,7 +4,6 @@ export const loginAction=async (user)=>{
     console.log("login accion")
     const resp=await fetchs('login', user, 'POST')
     const body=await resp.json()
-    debugger;
     if(resp.ok){
         console.log("login con exito")
         console.log(body)
