@@ -4,12 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Carrito from './routes/Carrito';
 import Home from './routes/Home';
 import ProductDetail from './routes/ProductDetail';
+import Register from './routes/Register';
+import Login from './routes/Login';
+
+
+import { UserProvider } from './contexts/UserContext';
+
 const router=createBrowserRouter([
   {
-    
     path:"/",
     element:<App/>,
     children:[
@@ -30,13 +36,22 @@ const router=createBrowserRouter([
         element:<Carrito></Carrito>
       }
     ]
-
+  },
+  {
+    path:"/register",
+    element:<Register/>
+  },
+  {
+    path:"/login",
+    element:<Login/>
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <UserProvider>
+      <RouterProvider router={router}/>
+    </UserProvider>
   </React.StrictMode>
 );
 
