@@ -7,10 +7,12 @@ const ProductList = () => {
     // const [offset, setOffset]=useState(0)
     let offset=0
     const fetchData=async()=>{
+        console.log(offset)
         try {
-            const data=await getProductsAcction(offset)
-            setListProducts(listProducts=>[...listProducts, ...data])
-            
+            await getProductsAcction(offset)
+            .then(data=>{
+                setListProducts(listProducts=>[...listProducts, ...data])
+            })
         } catch (error) {
             console.error(error)
         }
@@ -24,29 +26,35 @@ const ProductList = () => {
         // console.log("Win",window.innerHeight)
         // console.log("height",ev.target.documentElement.scrollHeight)
         if(win+top+1>height){
+            offset+=10
             fetchData()
-            
         }
     }
 
     useEffect(() => {
         fetchData()
-        offset+=10;
+        // offset+=10;
         window.addEventListener('scroll', handleScroll)
+        return ()=>window.removeEventListener('scroll', handleScroll)
     }, []);
-
 
     return (
         <div>
+                {listProducts.map(element=>(
+                    // <p key={element.id}>{element.title}</p>
+                    <ProductCard key={element.id} product={element}></ProductCard>
+                ))}
             {
                 listProducts.length<1&&<h1>Loading</h1>
             }
-            {listProducts.map(element=>(
-                // <p key={element.id}>{element.title}</p>
-                <ProductCard key={element.id} product={element}></ProductCard>
-            ))}
         </div>
     );
 }
+/*
+{listProducts.map(element=>(
+                // <p key={element.id}>{element.title}</p>
+                <ProductCard key={element.id} product={element}></ProductCard>
+            ))}
 
+*/
 export default ProductList;
