@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductByIdAction } from '../actions/GetProductById';
+import styled from 'styled-components';
 const ProductDetail = () => {
     const params=useParams()
     const [product, setProduct] = useState({});
