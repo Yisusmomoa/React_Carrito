@@ -48,11 +48,13 @@ const ImgProduct=styled.img`
 `
 const ContainerInfo=styled.div`
     width:auto;
-    height:60%;
+    height:70%;
     display:flex;
     flex-direction:column;
     justify-content: space-evenly;
     align-items: center;
+    margin-right:0.4rem;
+    margin-left:0.4rem;
 
 `
 const ContainerButtonAddCart=styled.button`
@@ -69,11 +71,32 @@ const ContainerButtonAddCart=styled.button`
     color:#fff;
   } 
 `
+const ContainerCountProds=styled.div`
+    display:flex;
+    margin-bottom:2rem;
+    
+`
+const InputCountProds=styled.input`
+padding: 8px 16px;
+    text-align: center;
+    font-size: 16px;
+`
+const ButtonCountProds=styled.button`
+    border:none;
+    background-color:black;
+    color:white;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 16px;
+    cursor:pointer;
+    border-radius:2px;
+`
 const ProductDetail = () => {
     const params=useParams()
     const [product, setProduct] = useState({});
     const [loading, setLoading]=useState(true)
     const [image, setImage]=useState("");
+    const [amount, setAmount]=useState(1)
 
     const getProduct=async ()=>{
         const data=await getProductByIdAction(params.id)
@@ -113,7 +136,12 @@ const ProductDetail = () => {
                 <h1>{product.title}</h1>
                 <h2>${product.price}</h2>
                 <h6>{product.description}</h6>
-                <Link>Categoria: {product.category.name}</Link>
+                <ContainerCountProds>
+                    <ButtonCountProds onClick={()=>setAmount(amount-1)}>-</ButtonCountProds>
+                    <InputCountProds type='number' value={amount} min='1' max='2'></InputCountProds>
+                    <ButtonCountProds onClick={()=>setAmount(amount+1)}>+</ButtonCountProds>
+                </ContainerCountProds>
+                {/* <Link>Categoria: {product.category.name}</Link> */}
                 <ContainerButtonAddCart>Add to cart <BsFillCartFill/></ContainerButtonAddCart>
             </ContainerInfo>
         </Container>
