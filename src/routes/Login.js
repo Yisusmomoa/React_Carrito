@@ -3,7 +3,6 @@ import UserContext from '../contexts/UserContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-import introduction from '../media/introduction.svg'
 import Swal from 'sweetalert2'
 
 const Login = () => {   

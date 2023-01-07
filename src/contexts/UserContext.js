@@ -1,6 +1,6 @@
 // guardar la información del usuario autenticado
 
-import React, { createContext,useState } from "react";
+import React, { createContext,useState, useEffect } from "react";
 import { loginAction } from "../actions/LoginAction";
 
 
@@ -20,11 +20,16 @@ const UserProvider=({children})=>{
       const res=await loginAction(puser)
       if(res!=null){
         setUser(res)
+        sessionStorage.setItem('user', JSON.stringify(res))
         return true
       }
       return false
     }
-    
+    useEffect(() => {
+      if(sessionStorage.getItem('user')){
+        setUser(JSON.parse(sessionStorage.getItem('user')))
+      }
+    }, []);
     const logout=()=>setUser(null)
     const data={user, login, logout}
 
