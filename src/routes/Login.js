@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import UserContext from '../contexts/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
+import styled from 'styled-components';
+import introduction from '../media/introduction.svg'
 import Swal from 'sweetalert2'
 
 const Login = () => {   
@@ -54,18 +56,62 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <Fragment>
             {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-            <form onSubmit={handleSubmit}>
+            <ContainerLoginForm onSubmit={handleSubmit}>
+                <h1>Sign in</h1>
                 <input type='email' placeholder='email' name='email' onChange={handleChange}/>
 
                 {/* register your input into the hook by invoking the "register" function */}
                 {/* include validation with required or other standard HTML validation rules */}
                 <input type='password' placeholder='password' name='password' onChange={handleChange}/>
-                <button type='submit'>Login</button>
-            </form>
-        </div>
+                <ContainerFormButton type='submit'>Login</ContainerFormButton>
+            </ContainerLoginForm>
+        </Fragment>
     );
 }
+
+const ContainerLoginForm=styled.form`
+    display:flex;
+    height: 80vh;
+    width:60%;
+    margin:0 auto;
+    margin-top:2rem;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius:7px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding:10px;
+    h1{
+        align-self:center;
+    }
+    input{
+        border-radius:25px;
+        width:45%;
+        padding:10px 35px;
+        border:2px solid #707d80;
+    }
+`
+
+const ContainerFormButton=styled.button`
+  border-radius:25px;
+  padding:10px 35px;
+  width:55%;
+  text-align: center;
+  background-color:transparent;
+  border:2px solid #7e7e80;
+  cursor:pointer;
+  
+  :hover{
+    background-color:#7e7e80;
+    border:2px solid #fff;
+    color:#fff;
+  } 
+`
+
 
 export default Login;
