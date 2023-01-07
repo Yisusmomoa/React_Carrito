@@ -34,17 +34,18 @@ const router=createBrowserRouter([
       {
         path:"/cart",
         element:<Carrito></Carrito>
+      },
+      {
+        path:"/register",
+        element:<Register/>
+      },
+      {
+        path:"/login",
+        element:<Login/>
       }
     ]
-  },
-  {
-    path:"/register",
-    element:<Register/>
-  },
-  {
-    path:"/login",
-    element:<Login/>
   }
+
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
