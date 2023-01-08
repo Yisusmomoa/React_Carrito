@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getProductByIdAction } from '../actions/GetProductById';
 import styled from 'styled-components';
 import {BsFillCartFill} from 'react-icons/bs'
 import { ProductImgCarrousel } from '../components/ProductImgCarrousel/ProductImgCarrousel';
+import CartContext from '../contexts/CartContext';
 
 const Container=styled.div`
     
@@ -97,6 +98,7 @@ const ProductDetail = () => {
     const [loading, setLoading]=useState(true)
     const [image, setImage]=useState("");
     const [amount, setAmount]=useState(1)
+    const {addProduct}=useContext(CartContext)
 
     const getProduct=async ()=>{
         const data=await getProductByIdAction(params.id)
@@ -136,13 +138,14 @@ const ProductDetail = () => {
                 <h1>{product.title}</h1>
                 <h2>${product.price}</h2>
                 <h6>{product.description}</h6>
+                {/* container prods, convertir en un componente y hook */}
                 <ContainerCountProds>
                     <ButtonCountProds onClick={()=>setAmount(amount-1)}>-</ButtonCountProds>
-                    <InputCountProds type='number' value={amount} min='1' max='2'></InputCountProds>
+                    <InputCountProds type='number' value={amount} min='1' max='2' onChange={(ev)=>setAmount(ev.target.value)}></InputCountProds>
                     <ButtonCountProds onClick={()=>setAmount(amount+1)}>+</ButtonCountProds>
                 </ContainerCountProds>
                 {/* <Link>Categoria: {product.category.name}</Link> */}
-                <ContainerButtonAddCart>Add to cart <BsFillCartFill/></ContainerButtonAddCart>
+                <ContainerButtonAddCart onClick={()=>addProduct(product, amount)}>Add to cart <BsFillCartFill/></ContainerButtonAddCart>
             </ContainerInfo>
         </Container>
     );

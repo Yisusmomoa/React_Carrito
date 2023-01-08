@@ -13,6 +13,7 @@ import Login from './routes/Login';
 
 
 import { UserProvider } from './contexts/UserContext';
+import { CartProvider } from './contexts/CartContext';
 
 const router=createBrowserRouter([
   {
@@ -50,7 +51,9 @@ const router=createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <UserProvider>
-      <RouterProvider router={router}/>
+      <CartProvider>
+        <RouterProvider router={router}/>
+      </CartProvider>
     </UserProvider>
 );
 

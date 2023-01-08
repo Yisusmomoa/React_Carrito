@@ -1,8 +1,9 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import {BsFillCartFill} from 'react-icons/bs'
+import CartContext from '../../contexts/CartContext';
 
 const CardWrapper=styled.div`
   display:flex;
@@ -52,20 +53,23 @@ const CardInfoButtonAddCart=styled.button`
   } 
 `
 export const ProductCard = ({product}) => {
+  
+  const {addProduct}=useContext(CartContext)
   return (
     <CardWrapper>
       <Link to={`/products/${product.id}`}>
         <CardImg src={product.images[0]} alt={product.title}/>        
           <h2>{product.title}</h2>
-          <CardInfo>
+          
+        </Link>
+        <CardInfo>
             <h4>${product.price}</h4>
-            <CardInfoButtonAddCart>
+            <CardInfoButtonAddCart onClick={()=>addProduct(product, 1)}>
               <span>Add to cart</span>
               <BsFillCartFill/>
             </CardInfoButtonAddCart>
             {/* agregear icono de ecarrito */}
           </CardInfo>
-        </Link>
     </CardWrapper>
   )
 }
