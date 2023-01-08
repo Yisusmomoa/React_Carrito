@@ -3,7 +3,7 @@ import CartContext from '../../contexts/CartContext'
 
 export const CartTotal = () => {
     
-    const {total, cart, getTotal}=useContext(CartContext)
+    const {total}=useContext(CartContext)
     // const [totalCart, setTotalCart]=useState(total)
 
     // useEffect(() => {

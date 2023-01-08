@@ -20,19 +20,18 @@ const CartProvider=({children})=>{
         // que se actualice la cantidad del proudcto si ya esta en el carrito
         //update amount only if the product exists in the cart
 
-
         const tempCart=[...cart]
-        const product=cart.find(element=>element.id===id)
+        const product=tempCart.find(element=>element.id===id)
         product["amount"]=amount;
-        setCart(cart)
+        setCart(tempCart)
     }
     const getTotal=()=>{
-        const subTotal=cart.reduce((acc, element)=>acc+element.price, 0)
+        // aquí estaba el error xd
+        const subTotal=cart.reduce((acc, element)=>acc+(element.price*element.amount), 0)
         setTotal({
             subTotal,
             Total:subTotal+subTotal*0.16
         })
-        console.log(total)
     }
 
     useEffect(() => {
