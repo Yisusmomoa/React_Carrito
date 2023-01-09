@@ -5,6 +5,29 @@ import styled from 'styled-components';
 import {BsFillCartFill} from 'react-icons/bs'
 import CartContext from '../../contexts/CartContext';
 
+
+export const ProductCard = ({product}) => {
+  
+  const {addProduct}=useContext(CartContext)
+  return (
+    <CardWrapper>
+      <Link to={`/products/${product.id}`}>
+        <CardImg src={product.images[0]} alt={product.title}/>        
+          <h2>{product.title}</h2>
+          
+        </Link>
+        <CardInfo>
+            <h4>${product.price}</h4>
+            <CardInfoButtonAddCart onClick={()=>addProduct(product, 1)}>
+              <span>Add to cart</span>
+              <BsFillCartFill/>
+            </CardInfoButtonAddCart>
+            {/* agregear icono de ecarrito */}
+          </CardInfo>
+    </CardWrapper>
+  )
+}
+
 const CardWrapper=styled.div`
   display:flex;
   flex-direction:column;
@@ -52,28 +75,6 @@ const CardInfoButtonAddCart=styled.button`
     color:#fff;
   } 
 `
-export const ProductCard = ({product}) => {
-  
-  const {addProduct}=useContext(CartContext)
-  return (
-    <CardWrapper>
-      <Link to={`/products/${product.id}`}>
-        <CardImg src={product.images[0]} alt={product.title}/>        
-          <h2>{product.title}</h2>
-          
-        </Link>
-        <CardInfo>
-            <h4>${product.price}</h4>
-            <CardInfoButtonAddCart onClick={()=>addProduct(product, 1)}>
-              <span>Add to cart</span>
-              <BsFillCartFill/>
-            </CardInfoButtonAddCart>
-            {/* agregear icono de ecarrito */}
-          </CardInfo>
-    </CardWrapper>
-  )
-}
-
 
 
 /*

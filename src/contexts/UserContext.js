@@ -2,6 +2,7 @@
 
 import React, { createContext,useState, useEffect } from "react";
 import { loginAction } from "../actions/LoginAction";
+import Swal from 'sweetalert2'
 
 
 const UserContext=createContext()
@@ -30,7 +31,19 @@ const UserProvider=({children})=>{
         setUser(JSON.parse(sessionStorage.getItem('user')))
       }
     }, []);
-    const logout=()=>setUser(null)
+    const logout=()=>{
+      Swal.fire({
+        title: 'Do you want to exit?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          sessionStorage.removeItem('user')
+          setUser(null)
+        } 
+      })
+    }
     const data={user, login, logout}
 
     return (
