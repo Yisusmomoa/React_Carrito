@@ -9,7 +9,8 @@ const fetchs=(endpoint, data, method)=>{
         return fetch(url, {
             method,
             headers:{
-                'Content-type':'application/json'
+                'Content-type':'application/json',
+                'Access-Control-Allow-Origin': '*',
             },
             body:JSON.stringify(data)
         })

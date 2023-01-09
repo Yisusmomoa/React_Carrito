@@ -5,28 +5,30 @@ import Swal from 'sweetalert2'
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import introduction from '../media/introduction.svg'
-const RegisterAction=async (user)=>{
-    user.typeUser="Student"
-    user.carrer="LMAD"
-    const resp=await fetchs('register', user, 'POST')
-    const body=await resp.json()
-    const navigate = useNavigate()
-    if(resp.ok){
-        console.log("Registrado con exito")
-        Swal.fire({
-            icon: 'success',
-            title: 'Registrado'
-        }).then(()=>navigate("/"))
-    }
-    else{
-        console.log("Error registro")
-        Swal.fire({
-            icon: 'error',
-            title: 'Error'
-        })
-    }
-    return body
-}
+import { RegisterAction } from '../actions/RegisterAction';
+
+// const RegisterAction=async (user)=>{
+//     user.typeUser="Student"
+//     user.carrer="LMAD"
+//     const resp=await fetchs('register', user, 'POST')
+//     const body=await resp.json()
+//     const navigate = useNavigate()
+//     if(resp.ok){
+//         console.log("Registrado con exito")
+//         Swal.fire({
+//             icon: 'success',
+//             title: 'Registrado'
+//         }).then(()=>navigate("/"))
+//     }
+//     else{
+//         console.log("Error registro")
+//         Swal.fire({
+//             icon: 'error',
+//             title: 'Error'
+//         })
+//     }
+//     return body
+// }
 
 const Register = () => {
     const {
@@ -34,10 +36,10 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const navigate = useNavigate()
     const [error, setError] = useState(false);
 
-    const onSubmit=(data)=>{
+    const onSubmit=async (data)=>{
         console.log(data)
         Swal.fire({
             icon: 'info',
@@ -46,7 +48,19 @@ const Register = () => {
               Swal.showLoading();
             }
         })
-            RegisterAction(data)
+        
+        if (await RegisterAction(data)) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Bienvenido'
+            }).then(()=>navigate("/login"))
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Error'
+            })
+        }
+       
         
     }
 
