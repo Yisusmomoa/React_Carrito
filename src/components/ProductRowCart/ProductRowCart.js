@@ -15,8 +15,6 @@ export const ProductRowCart = ({product, removeProduct, updateAmount}) => {
   }
 
   return (
-    <>
-    
       <ContainerProductRow>
         <BsFillXCircleFill size={30} color='red' cursor={'pointer'} onClick={()=>removeProduct(product.id)}/>
         <ImgProductRow src={product.images[0]} alt={product.title}/>
@@ -36,7 +34,6 @@ export const ProductRowCart = ({product, removeProduct, updateAmount}) => {
         </div>
         
       </ContainerProductRow>
-    </>
   )
 }
 

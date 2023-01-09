@@ -9,6 +9,7 @@ const Carrito = () => {
     const {cart, removeProduct, updateAmount}=useContext(CartContext)
     
     return (
+        <>
         <ContainerProductList>
             {
                 cart.map((element)=>{
@@ -23,8 +24,9 @@ const Carrito = () => {
                     </>)
                 })
             }
-            <CartTotal ></CartTotal>
         </ContainerProductList>
+        <CartTotal ></CartTotal>
+        </>
     );
 }
 
@@ -37,6 +39,9 @@ const ContainerProductList=styled.div`
 
     margin:0 auto;
     margin-top:2rem;
+    height: 55vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 `
 
 export default Carrito;
